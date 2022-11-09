@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Module2_HW5
 {
-    internal class Result
+    internal class LogEntry
     {
-        // Result class contains Status(bool) and an error message
+        // LogEntry class contains Status(bool) and an error message
 
         // Default constuctor
-        internal Result()
+        internal LogEntry()
         {
             Status = null;
             ErrorMessage = string.Empty;
         }
 
         // Constructor with parameters
-        internal Result(bool status, string message, LogTypeEnum logType, DateTime dateTime)
+        internal LogEntry(bool status, string message, LogTypeEnum logType, DateTime dateTime)
         {
             Status = status;
             ErrorMessage = message;

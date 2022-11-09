@@ -10,13 +10,17 @@ namespace Module2_HW5
     {
         internal static void Run()
         {
+            if (!ConfigController.ValidateConfig())
+            {
+                Environment.Exit(0);
+            }
+
             Console.WriteLine("[Log DateTime] [Log type] [Log message]");
             for (int i = 0; i < 100; i++)
             {
                 Random random = new Random();
                 int randomNum = random.Next(1, 4);
-
-                Result answerFromAction = new Result();
+                bool answerFromAction;
                 switch (randomNum)
                 {
                     case 1:
@@ -29,14 +33,32 @@ namespace Module2_HW5
                     case 2:
                         {
                             // Action 2
-                            answerFromAction = Actions.SkipMethod();
+                            try
+                            {
+                                Actions.SkipMethod();
+                            }
+                            catch (Exceptions.BusinessException ex)
+                            {
+                                LogEntry log = new LogEntry(false, "Action got this custom Exception :" + ex.Message, LogEntry.LogTypeEnum.Warning, DateTime.Now);
+                                Logger.GetInstance().SaveNewLogEntry(log);
+                            }
+
                             break;
                         }
 
                     case 3:
                         {
-                            // Action 3
-                            answerFromAction = Actions.BrakeMethod();
+                              // Action 3
+                            try
+                            {
+                                 Actions.BrakeMethod();
+                            }
+                            catch (Exception ex)
+                            {
+                                LogEntry log = new LogEntry(false, "Action failed by reason:" + ex, LogEntry.LogTypeEnum.Error, DateTime.Now);
+                                Logger.GetInstance().SaveNewLogEntry(log);
+                            }
+
                             break;
                         }
 
@@ -45,22 +67,11 @@ namespace Module2_HW5
                             break;
                         }
                 }
-
-                if (answerFromAction.Status == false)
-                {
-                    answerFromAction.ErrorMessage = "Action failed by a reason:" + answerFromAction.ErrorMessage;
-                    Logger.GetInstance().SaveNewLogEntry(answerFromAction);
-                }
-                else
-                {
-                    Logger.GetInstance().SaveNewLogEntry(answerFromAction);
-                }
             }
 
             // Print logs from memory and to file
             LogWriter.PrintMemoryLogs(Logger.GetInstance().ReturnMemoryLogs());
-            LogWriter.PrintLogsToFile(Logger.GetInstance().ReturnMemoryLogs());
-            Console.WriteLine("\nNew logs have been added to log.txt file which is located in project directory");
+            Console.WriteLine("\n\n\n");
         }
     }
 }

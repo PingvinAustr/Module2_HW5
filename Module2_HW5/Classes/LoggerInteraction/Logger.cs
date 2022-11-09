@@ -8,7 +8,7 @@ namespace Module2_HW5
     internal class Logger
     {
         private static Logger instance;
-        private List<Result> _logList = new List<Result>();
+        private LogEntry[] _logList = new LogEntry[0];
         private Logger()
         {
         }
@@ -24,13 +24,15 @@ namespace Module2_HW5
         }
 
         // Logging method
-        internal void SaveNewLogEntry(Result logEntry)
+        internal void SaveNewLogEntry(LogEntry logEntry)
         {
-            _logList.Add(logEntry);
+            FileService.PrintSingleLogToCurrentFile(logEntry);
+            LogEntry[] logEntries = new LogEntry[1] { logEntry };
+            _logList = _logList.Concat(logEntries).ToArray();
         }
 
         // Method that returns current logs
-        internal List<Result> ReturnMemoryLogs()
+        internal LogEntry[] ReturnMemoryLogs()
         {
             return _logList;
         }

@@ -44,7 +44,9 @@ namespace Module2_HW5
         internal static void PrintSingleLogToCurrentFile(LogEntry logEntry)
         {
             CheckLogFiles();
-            File.AppendAllText(CurrentFile.FullName, "[" + logEntry.LogTime + "] [" + logEntry.LogType + "] [" + logEntry.ErrorMessage + "]\n");
+            File.AppendAllText(
+                CurrentFile.FullName,
+                "[" + logEntry.LogTime + "] [" + logEntry.LogType + "] [" + logEntry.ErrorMessage + "]\n");
         }
 
         private static void CreateCurrentLogFile(string parentPath)

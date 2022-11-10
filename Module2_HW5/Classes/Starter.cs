@@ -39,7 +39,12 @@ namespace Module2_HW5
                             }
                             catch (Exceptions.BusinessException ex)
                             {
-                                LogEntry log = new LogEntry(false, "Action got this custom Exception :" + ex.Message, LogEntry.LogTypeEnum.Warning, DateTime.Now);
+                                LogEntry log = new LogEntry(
+                                    false,
+                                    "Action got this custom Exception :" + ex.Message,
+                                    LogEntry.LogTypeEnum.Warning,
+                                    DateTime.Now);
+
                                 Logger.GetInstance().SaveNewLogEntry(log);
                             }
 
@@ -55,7 +60,11 @@ namespace Module2_HW5
                             }
                             catch (Exception ex)
                             {
-                                LogEntry log = new LogEntry(false, "Action failed by reason:" + ex, LogEntry.LogTypeEnum.Error, DateTime.Now);
+                                LogEntry log = new LogEntry(
+                                    false,
+                                    "Action failed by reason:" + ex,
+                                    LogEntry.LogTypeEnum.Error,
+                                    DateTime.Now);
                                 Logger.GetInstance().SaveNewLogEntry(log);
                             }
 

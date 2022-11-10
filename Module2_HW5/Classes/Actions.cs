@@ -10,7 +10,12 @@ namespace Module2_HW5
     {
         internal static bool StartMethod()
         {
-            LogEntry startResult = new LogEntry(true, "Start method: StartMethod()", LogEntry.LogTypeEnum.Info, DateTime.Now);
+            LogEntry startResult = new LogEntry(
+                true,
+                "Start method: StartMethod()",
+                LogEntry.LogTypeEnum.Info,
+                DateTime.Now);
+
             Logger.GetInstance().SaveNewLogEntry(startResult);
             return true;
         }

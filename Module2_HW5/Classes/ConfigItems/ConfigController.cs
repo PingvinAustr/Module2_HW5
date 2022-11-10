@@ -27,7 +27,9 @@ namespace Module2_HW5
             else if (!fileInf.Exists)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Config file ('.json') does not exist! Logger is not able to save logs to file. Please create config file and try again.");
+                Console.WriteLine(
+                    "Config file ('.json') does not exist! Logger is not able to save logs to file.",
+                    "Please create config file and try again.");
                 Console.ForegroundColor = ConsoleColor.White;
                 return false;
             }
@@ -40,7 +42,9 @@ namespace Module2_HW5
                     if (!Regex.IsMatch(configParameters.LogFolderName, pattern))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Config file parameters are invalid! Logger is not able to save logs to file. Please change config file and try again.");
+                        Console.WriteLine(
+                            "Config file parameters are invalid! Logger is not able to save logs to file.",
+                            "Please change config file and try again.");
                         Console.ForegroundColor = ConsoleColor.White;
                         return false;
                     }
